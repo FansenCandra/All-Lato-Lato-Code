@@ -7,7 +7,7 @@ l = 0.25   # Length of the pendulum (m)
 a0 = 0.1  # Coefficient a0
 omega= 2 # Angular frequency (rad/s)
 b = 0   # Coefficient b
-m = 1.0   # Mass of the pendulum bob (kg) (does not affect equation of motion, set 1 for convenience)
+m = 0.020   # Mass of the pendulum bob (kg) 
 
 # Initial conditions
 theta0 = 1.5       # Initial angle (rad)
@@ -38,8 +38,7 @@ for i, t in enumerate(t_span):
     theta_dot = apply_constraint(theta, theta_dot)
     
     # Update theta_dot and theta using the differential equation
-    theta_double_dot = (-(g / l) + a0 * omega**2 * np.cos(omega * t)) 
-    * np.sin(theta) + (b / m) * theta_dot
+    theta_double_dot = (-(g / l) + a0 * omega**2 * np.cos(omega * t)) * np.sin(theta)
     theta_dot += theta_double_dot * (t_span[1] - t_span[0])
     theta += theta_dot * (t_span[1] - t_span[0])
     
