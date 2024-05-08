@@ -9,7 +9,7 @@ g = 9.81  # Acceleration due to gravity (m/s^2)
 l = 0.25  # Length of the pendulum (m)
 a0 = 1  # Coefficient a0
 b = 0     # Coefficient b
-m = 1.0   # Mass of the pendulum bob (kg)
+m =0.020   # Mass of the pendulum bob (kg)
 
 # Time span
 t_span = np.linspace(0, 3, 1500)
@@ -41,7 +41,6 @@ def solve_pendulum(omega, theta0, theta_dot0):
         # Update theta_dot and theta 
         theta_double_dot = (-(g / l) + a0 * omega**2 
         * np.cos(omega * t)) * np.sin(theta)
-        + (b / m) * theta_dot
         theta_dot += theta_double_dot * (t_span[1] - t_span[0])
         theta += theta_dot * (t_span[1] - t_span[0])
         
