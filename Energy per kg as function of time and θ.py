@@ -8,7 +8,7 @@ l = 0.25   # Length of the pendulum (m)
 a0 = 0.5  # Coefficient a0
 omega = 10  # Angular frequency (rad/s)
 b = 0   # Coefficient b
-m = 1.0   # Mass of the pendulum bob (kg) (does not affect equation of motion, set 1 for convenience)
+m = 0.020   # Mass of the pendulum bob (kg) 
 
 # Initial conditions
 theta0 = 1.5       # Initial angle (rad)
@@ -42,10 +42,10 @@ def apply_constraint(theta, theta_dot):
 
 # Define the energy function
 def energy_function(theta, theta_dot, t):
-    kinetic_energy = 0.5 * m * (l**2 * theta_dot**2 +a0**2 
+    kinetic_energy = 0.5 * (l**2 * theta_dot**2 +a0**2 
     * omega**2 * (np.sin(omega * t))**2  - 2* theta_dot * l * a0 * omega 
     * np.sin(omega * t)) 
-    potential_energy =  m * g * l * (1 - np.cos(theta))
+    potential_energy =  g * l * (1 - np.cos(theta))
     return kinetic_energy + potential_energy
 
 # Solve the differential equation and track energy
@@ -71,8 +71,8 @@ for i, t in enumerate(t_span):
 plt.figure(figsize=(10, 4))
 plt.plot(t_span, energy_values)
 plt.xlabel('Time (s)')
-plt.ylabel('Energy (E)')
-plt.title('Energy E as a Function of Time')
+plt.ylabel('Energy per kg (E/kg)')
+plt.title('Energy E/kg as a Function of Time')
 plt.grid()
 plt.show()
 
@@ -80,7 +80,7 @@ plt.show()
 plt.figure(figsize=(10, 4))
 plt.plot(theta_values, energy_values)
 plt.xlabel('theta (rad)')
-plt.ylabel('Energy (E)')
+plt.ylabel('Energy per kg (E/kg)')
 plt.title('Energy E as a Function of theta')
 plt.grid()
 plt.show()
